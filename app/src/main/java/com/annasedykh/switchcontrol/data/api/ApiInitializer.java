@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiInitializer {
 
-    private static String BASE_URL = "http://81.26.145.250:1504/api/config.php";
+    private static String BASE_URL = "http://81.26.145.250:1504/api/";
 
     public Api init() {
         Gson gson = createGson();

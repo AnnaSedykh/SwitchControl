@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private void initInputs() {
 
         viewModel.switchList().observe(this,
-                switchList -> adapter.setSwitchList(switchList));
+                switchList -> {
+                    adapter.setSwitchList(switchList);
+                    refresh.setRefreshing(false);
+                });
     }
 }

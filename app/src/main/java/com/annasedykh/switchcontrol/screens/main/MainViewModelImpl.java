@@ -74,7 +74,6 @@ public class MainViewModelImpl extends MainViewModel {
                 .subscribe(
                         list -> {
                             database.saveSwitchList(list);
-                            switchList.postValue(list);
                         }, throwable -> Log.e(TAG, "onFailure: load switchList error ", throwable));
 
         disposables.add(disposable);

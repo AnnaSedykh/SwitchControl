@@ -12,9 +12,9 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-    @GET
+    @GET("config.php")
     Observable<List<SwitchEntity>> switchList(@Query("method") String method);
 
-    @POST
+    @POST("config.php")
     Observable<Object> updateSwitch(@Body SwitchEntity switchEntity);
 }

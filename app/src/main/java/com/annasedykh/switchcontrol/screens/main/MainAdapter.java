@@ -70,14 +70,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
         }
 
         void bind(SwitchEntity switchEntity, int position) {
-            bindToggle(position);
             bindName(switchEntity);
             bindPercentage(switchEntity);
+            bindToggle();
             bindBackground(position);
-        }
-
-        private void bindToggle(int position) {
-
         }
 
         private void bindName(SwitchEntity switchEntity) {
@@ -94,7 +90,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
                 if (channel_second != null) {
                     sb.append(" / ");
                 }
-            } else if (channel_second != null) {
+            }
+            if (channel_second != null) {
                 sb.append(channel_second);
             }
             percentage.setText(sb.toString());
@@ -115,6 +112,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
                 Log.e(TAG, "formatBrightness: ", e);
             }
             return result;
+        }
+
+        private void bindToggle() {
+            if(switchName.getText().length() > 0){
+                toggle.setChecked(true);
+            }
         }
 
         private void bindBackground(int position) {
