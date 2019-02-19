@@ -7,12 +7,19 @@
     android:orientation="vertical"
     tools:context=".screens.main.MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/primary"
-        app:title="@string/app_name" />
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/primary"
+            android:backgroundTint="@color/primary"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/primary_text_color" />
+    </android.support.v7.widget.CardView>
 
     <FrameLayout
         android:id="@+id/switch_content"

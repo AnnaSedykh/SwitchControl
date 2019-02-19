@@ -73,7 +73,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
             bindName(switchEntity);
             bindPercentage(switchEntity);
             bindToggle();
-            bindBackground(position);
         }
 
         private void bindName(SwitchEntity switchEntity) {
@@ -117,14 +116,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
         private void bindToggle() {
             if(switchName.getText().length() > 0){
                 toggle.setChecked(true);
-            }
-        }
-
-        private void bindBackground(int position) {
-            if (position % 2 == 0) {
-                itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.item_background_even));
-            } else {
-                itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.item_background_odd));
             }
         }
     }
