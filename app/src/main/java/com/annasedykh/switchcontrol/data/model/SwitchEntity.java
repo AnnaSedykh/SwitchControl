@@ -1,4 +1,4 @@
-package com.annasedykh.switchcontrol.data.api.model;
+package com.annasedykh.switchcontrol.data.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

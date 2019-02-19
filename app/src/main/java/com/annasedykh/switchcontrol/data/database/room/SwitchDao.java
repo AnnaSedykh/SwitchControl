@@ -6,7 +6,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.annasedykh.switchcontrol.data.api.model.SwitchEntity;
+import com.annasedykh.switchcontrol.data.model.SwitchEntity;
 
 import java.util.List;
 

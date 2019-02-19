@@ -1,6 +1,6 @@
 package com.annasedykh.switchcontrol.data.database;
 
-import com.annasedykh.switchcontrol.data.api.model.SwitchEntity;
+import com.annasedykh.switchcontrol.data.model.SwitchEntity;
 
 import java.util.List;
 

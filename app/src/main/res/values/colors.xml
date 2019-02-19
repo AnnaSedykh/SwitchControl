@@ -11,4 +11,7 @@
 
     <color name="transparent_gray_80">#e1191a2a</color>
 
+    <color name="item_background_even">#212237</color>
+    <color name="item_background_odd">@color/primary</color>
+
 </resources>

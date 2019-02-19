@@ -3,4 +3,8 @@
 
     <string name="brightness">Brightness</string>
     <string name="switch_name">Switch name</string>
+    <string name="on">on</string>
+    <string name="off">off</string>
+    <string name="max">100%</string>
+    <string name="percentage">%d\%</string>
 </resources>
