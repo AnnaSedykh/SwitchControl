@@ -13,7 +13,7 @@ import com.annasedykh.switchcontrol.data.model.SwitchEntity;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -46,42 +46,68 @@ public class MainViewModelImpl extends MainViewModel {
     @Override
     public void loadSwitchList(boolean fromRefresh) {
         if (fromRefresh) {
-            loadViaApi();
+            loadSwitchListViaApi();
         } else {
-            getFromDB();
+            getSwitchListFromDB();
         }
     }
 
-    private void getFromDB() {
+    private void getSwitchListFromDB() {
         Disposable disposable = database.getSwitchList()
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
                 .subscribe(
                         list -> {
                             if (!list.isEmpty()) {
-                                switchList.setValue(list);
+                                switchList.postValue(list);
                             } else {
-                                loadViaApi();
+                                loadSwitchListViaApi();
                             }
                         });
 
         disposables.add(disposable);
     }
 
-    private void loadViaApi() {
+    private void loadSwitchListViaApi() {
 
         Disposable disposable = api.switchList(QUERY_PARAM_METHOD)
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                        list -> {
-                            database.saveSwitchList(list);
-                        }, throwable -> Log.e(TAG, "onFailure: load switchList error ", throwable));
+                        list -> database.saveSwitchList(list),
+                        throwable -> Log.e(TAG, "onFailure: load switchList error ", throwable));
 
         disposables.add(disposable);
     }
 
 
     @Override
-    public void onToggleSetChecked(boolean isChecked) {
+    public void onToggleSetChecked(String id, boolean isChecked) {
+        Disposable disposable = Observable.fromCallable(() ->
+                database.getSwitch(id))
+                .subscribeOn(Schedulers.io())
+                .subscribe(switchEntity -> {
+                    if (switchEntity != null) {
+                        if (!SwitchEntity.STATUS_DISABLED.equals(switchEntity.status0)) {
+                            switchEntity.status0 = isChecked ? SwitchEntity.STATUS_MAX : SwitchEntity.STATUS_OFF;
 
+                        }
+                        if (!SwitchEntity.STATUS_DISABLED.equals(switchEntity.status1)) {
+                            switchEntity.status1 = isChecked ? SwitchEntity.STATUS_MAX : SwitchEntity.STATUS_OFF;
+                        }
+                        updateSwitch(switchEntity);
+                    }
+                });
+
+        disposables.add(disposable);
     }
+
+    private void updateSwitch(SwitchEntity switchEntity) {
+        Disposable disposable = api.updateSwitch(switchEntity)
+                .subscribeOn(Schedulers.io())
+                .subscribe(
+                        Void -> database.updateSwitch(switchEntity),
+                        throwable -> Log.e(TAG, "onFailure: update switch error ", throwable));
+
+        disposables.add(disposable);
+    }
+
 }
