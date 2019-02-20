@@ -16,5 +16,5 @@ public interface Api {
     Observable<List<SwitchEntity>> switchList(@Query("method") String method);
 
     @POST("config.php")
-    Observable<Object> updateSwitch(@Body SwitchEntity switchEntity);
+    Observable<Void> updateSwitch(@Body SwitchEntity switchEntity);
 }

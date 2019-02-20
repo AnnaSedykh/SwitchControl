@@ -19,6 +19,6 @@ public abstract class MainViewModel extends AndroidViewModel {
 
     public abstract LiveData<List<SwitchEntity>> switchList();
 
-    public abstract void onToggleSetChecked(boolean isChecked);
+    public abstract void onToggleSetChecked(String id, boolean isChecked);
 
 }

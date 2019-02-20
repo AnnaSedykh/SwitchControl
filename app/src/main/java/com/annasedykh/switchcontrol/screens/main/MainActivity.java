@@ -14,7 +14,7 @@ import com.annasedykh.switchcontrol.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainAdapter.ToggleListener{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(MainViewModelImpl.class);
 
         adapter = new MainAdapter();
+        adapter.setListener(this);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
 
@@ -57,5 +58,10 @@ public class MainActivity extends AppCompatActivity {
                     adapter.setSwitchList(switchList);
                     refresh.setRefreshing(false);
                 });
+    }
+
+    @Override
+    public void onUserCheckedChange(String id, boolean isChecked) {
+        viewModel.onToggleSetChecked(id, isChecked);
     }
 }

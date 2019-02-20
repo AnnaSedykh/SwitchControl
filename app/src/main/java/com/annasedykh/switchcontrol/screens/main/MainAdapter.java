@@ -2,7 +2,6 @@ package com.annasedykh.switchcontrol.screens.main;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
@@ -25,6 +24,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
     private static final String TAG = "MainAdapter";
 
     private List<SwitchEntity> switchList = Collections.emptyList();
+    private ToggleListener listener = null;
+
+    void setListener(ToggleListener listener) {
+        this.listener = listener;
+    }
 
     public void setSwitchList(List<SwitchEntity> switchList) {
         this.switchList = switchList;
@@ -40,7 +44,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
 
     @Override
     public void onBindViewHolder(@NonNull SwitchEntityViewHolder holder, int position) {
-        holder.bind(switchList.get(position), position);
+        holder.bind(switchList.get(position), listener);
     }
 
     @Override
@@ -60,6 +64,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
         @BindView(R.id.percentage)
         TextView percentage;
 
+        private Boolean isSwitchedByUser = true;
         private Context context;
 
         SwitchEntityViewHolder(View itemView) {
@@ -69,10 +74,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(SwitchEntity switchEntity, int position) {
+        void bind(SwitchEntity switchEntity, ToggleListener listener) {
             bindName(switchEntity);
             bindPercentage(switchEntity);
             bindToggle();
+            bindListener(switchEntity, listener);
         }
 
         private void bindName(SwitchEntity switchEntity) {
@@ -114,9 +120,31 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
         }
 
         private void bindToggle() {
-            if(switchName.getText().length() > 0){
+            if (percentage.getText().toString().contains("%") && !toggle.isChecked()) {
+                isSwitchedByUser = false;
                 toggle.setChecked(true);
+            } else if (percentage.getText().toString().contains("off") && toggle.isChecked()) {
+                isSwitchedByUser = false;
+                toggle.setChecked(false);
+            }
+            if (!isSwitchedByUser) {
+                isSwitchedByUser = true;
             }
         }
+
+        private void bindListener(SwitchEntity switchEntity, ToggleListener listener) {
+
+            toggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (listener != null) {
+                    if (isSwitchedByUser) {
+                        listener.onUserCheckedChange(switchEntity.id, isChecked);
+                    }
+                }
+            });
+        }
+    }
+
+    interface ToggleListener {
+        void onUserCheckedChange(String id, boolean isChecked);
     }
 }
