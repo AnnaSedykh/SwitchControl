@@ -7,4 +7,9 @@
     <string name="off">off</string>
     <string name="max">100%</string>
     <string name="percentage">%d%%</string>
+    <string name="channel_1">Channel 1 brightness</string>
+    <string name="channel_2">Channel 2 brightness</string>
+    <string name="dimmer_setting">Dimmer setting</string>
+    <string name="save">Save</string>
+
 </resources>

@@ -11,4 +11,10 @@
 
     <color name="transparent_gray_80">#e1191a2a</color>
 
+    <color name="point_color" >#F57F17</color>
+    <color name="point_halo_color">#E65100</color>
+    <color name="wheel_active_color">#F57F17</color>
+    <color name="wheel_inactive_color">#686D67</color>
+    <color name="btn">#5DDB62</color>
+
 </resources>

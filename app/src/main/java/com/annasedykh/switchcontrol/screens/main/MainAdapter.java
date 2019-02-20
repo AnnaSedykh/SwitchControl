@@ -8,10 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.annasedykh.switchcontrol.R;
 import com.annasedykh.switchcontrol.data.model.SwitchEntity;
+import com.annasedykh.switchcontrol.screens.dimmer.DimmerActivity;
 
 import java.util.Collections;
 import java.util.List;
@@ -64,8 +66,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
         @BindView(R.id.percentage)
         TextView percentage;
 
-        private Boolean isSwitchedByUser = true;
+        @BindView(R.id.settings)
+        ImageView settings;
+
         private Context context;
+        private boolean isSwitchedByUser = true;
+        private boolean hasTwoChannels = false;
 
         SwitchEntityViewHolder(View itemView) {
             super(itemView);
@@ -79,6 +85,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
             bindPercentage(switchEntity);
             bindToggle();
             bindListener(switchEntity, listener);
+            bindSettings(switchEntity);
         }
 
         private void bindName(SwitchEntity switchEntity) {
@@ -93,6 +100,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
             if (channel_first != null) {
                 sb.append(channel_first);
                 if (channel_second != null) {
+                    hasTwoChannels = true;
                     sb.append(" / ");
                 }
             }
@@ -141,6 +149,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
                     }
                 }
             });
+        }
+
+        private void bindSettings(SwitchEntity switchEntity) {
+
+            settings.setOnClickListener(v -> DimmerActivity.start(context, switchEntity.id, hasTwoChannels));
         }
     }
 

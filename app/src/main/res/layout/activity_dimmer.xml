@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".screens.dimmer.DimmerActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <EditText
+        android:id="@+id/switch_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:inputType="text"
+        android:maxLines="3"
+        android:text="@string/switch_name"
+        android:textSize="20sp"
+        tools:ignore="Autofill,LabelFor" />
+
+    <LinearLayout
+        android:id="@+id/layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/channel_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/channel_1"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="18sp" />
+
+        <com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar
+            android:id="@+id/circle_bar_1"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            app:max="100"
+            app:pointer_color="@color/point_color"
+            app:pointer_halo_color="@color/point_halo_color"
+            app:pointer_size="15dp"
+            app:text_color="@color/accent_text_color"
+            app:text_size="40sp"
+            app:wheel_active_color="@color/wheel_active_color"
+            app:wheel_unactive_color="@color/wheel_inactive_color" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/channel_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/channel_2"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="18sp" />
+
+        <com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar
+            android:id="@+id/circle_bar_2"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            app:max="100"
+            app:pointer_color="@color/point_color"
+            app:pointer_halo_color="@color/point_halo_color"
+            app:pointer_size="15dp"
+            app:text_color="@color/accent_text_color"
+            app:text_size="40sp"
+            app:wheel_active_color="@color/wheel_active_color"
+            app:wheel_unactive_color="@color/wheel_inactive_color" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/save"
+        android:background="@color/btn"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+</LinearLayout>
