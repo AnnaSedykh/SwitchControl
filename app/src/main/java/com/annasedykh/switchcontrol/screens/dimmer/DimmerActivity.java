@@ -108,12 +108,18 @@ public class DimmerActivity extends AppCompatActivity {
         if (SwitchEntity.STATUS_DISABLED.equals(entity.status0)) {
             layout1.setVisibility(View.GONE);
         } else {
-            circleBar1.setValue(convertToBrightness(entity.status0));
+            Float brightness1 = convertToBrightness(entity.status0);
+            if (brightness1 != null) {
+                circleBar1.setValue(brightness1);
+            }
         }
         if (SwitchEntity.STATUS_DISABLED.equals(entity.status1)) {
             layout2.setVisibility(View.GONE);
         } else {
-            circleBar2.setValue(convertToBrightness(entity.status1));
+            Float brightness2 = convertToBrightness(entity.status1);
+            if (brightness2 != null) {
+                circleBar2.setValue(brightness2);
+            }
         }
     }
 
@@ -150,18 +156,18 @@ public class DimmerActivity extends AppCompatActivity {
         return status;
     }
 
-    private float convertToBrightness(String status) {
-        float brightness;
+    private Float convertToBrightness(String status) {
+        Float brightness;
 
         switch (status) {
             case SwitchEntity.STATUS_OFF:
-                brightness = HoloCircleSeekBar.MAX_POINT_DEF_VALUE;
+                brightness = null;
                 break;
             case SwitchEntity.STATUS_MAX:
-                brightness = HoloCircleSeekBar.MAX_POINT_DEF_VALUE - 0.001f;
+                brightness = HoloCircleSeekBar.MAX_POINT_DEF_VALUE - 0.1F;
                 break;
             default:
-                brightness = Float.parseFloat(status) - 1;
+                brightness = Float.parseFloat(status) - 1F;
                 break;
         }
         return brightness;
