@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Switch Control</string>
+    <string name="app_name" translatable="false">Switch Control</string>
 
+    <string name="toolbar_title">Switch Control</string>
     <string name="brightness">Brightness</string>
     <string name="switch_name">Switch name</string>
     <string name="on">on</string>

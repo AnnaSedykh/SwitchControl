@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Управление выключателями</string>
-
+    <string name="toolbar_title">Управление выключателями</string>
     <string name="brightness">Яркость</string>
     <string name="switch_name">Имя выключателя</string>
     <string name="on">вкл</string>
