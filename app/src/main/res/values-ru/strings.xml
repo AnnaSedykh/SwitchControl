@@ -13,5 +13,7 @@
     <string name="channel_2">Яркость канала 2</string>
     <string name="dimmer_setting">Настройка диммера</string>
     <string name="save">Сохранить</string>
+    <string name="update_failed">Не удалось обновить настройки</string>
+    <string name="updated_ok">Настройки успешно обновлены!</string>
 
 </resources>

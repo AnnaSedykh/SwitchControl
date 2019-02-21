@@ -16,10 +16,14 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:inputType="text"
+        android:textColor="@color/primary_text_color"
         android:maxLines="3"
         android:text="@string/switch_name"
         android:textSize="20sp"
-        tools:ignore="Autofill,LabelFor" />
+        tools:ignore="Autofill,RtlHardcoded"
+        android:focusable="false"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/ic_edit"/>
 
     <LinearLayout
         android:id="@+id/layout_1"

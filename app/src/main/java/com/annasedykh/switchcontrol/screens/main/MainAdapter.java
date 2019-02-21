@@ -71,7 +71,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
 
         private Context context;
         private boolean isSwitchedByUser = true;
-        private boolean hasTwoChannels = false;
 
         SwitchEntityViewHolder(View itemView) {
             super(itemView);
@@ -100,7 +99,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
             if (channel_first != null) {
                 sb.append(channel_first);
                 if (channel_second != null) {
-                    hasTwoChannels = true;
                     sb.append(" / ");
                 }
             }
@@ -128,12 +126,19 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
         }
 
         private void bindToggle() {
-            if (percentage.getText().toString().contains("%") && !toggle.isChecked()) {
-                isSwitchedByUser = false;
-                toggle.setChecked(true);
-            } else if (percentage.getText().toString().contains("off") && toggle.isChecked()) {
-                isSwitchedByUser = false;
-                toggle.setChecked(false);
+            boolean hasChannelOn = percentage.getText().toString().contains("%");
+            boolean hasChannelOff = percentage.getText().toString().contains(context.getString(R.string.off));
+
+            if (toggle.isChecked()) {
+                if (hasChannelOff && !hasChannelOn) {
+                    isSwitchedByUser = false;
+                    toggle.setChecked(false);
+                }
+            } else if (!toggle.isChecked()) {
+                if (hasChannelOn) {
+                    isSwitchedByUser = false;
+                    toggle.setChecked(true);
+                }
             }
             if (!isSwitchedByUser) {
                 isSwitchedByUser = true;
@@ -153,7 +158,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
 
         private void bindSettings(SwitchEntity switchEntity) {
 
-            settings.setOnClickListener(v -> DimmerActivity.start(context, switchEntity.id, hasTwoChannels));
+            settings.setOnClickListener(v -> DimmerActivity.start(context, switchEntity));
         }
     }
 
