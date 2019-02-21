@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -61,6 +61,14 @@
                 tools:text="75% / 25%" />
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_setting"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

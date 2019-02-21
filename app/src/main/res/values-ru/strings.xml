@@ -9,5 +9,11 @@
     <string name="off">выкл</string>
     <string name="max">100%</string>
     <string name="percentage">%d%%</string>
+    <string name="channel_1">Яркость канала 1</string>
+    <string name="channel_2">Яркость канала 2</string>
+    <string name="dimmer_setting">Настройка диммера</string>
+    <string name="save">Сохранить</string>
+    <string name="update_failed">Не удалось обновить настройки</string>
+    <string name="updated_ok">Настройки успешно обновлены!</string>
 
 </resources>

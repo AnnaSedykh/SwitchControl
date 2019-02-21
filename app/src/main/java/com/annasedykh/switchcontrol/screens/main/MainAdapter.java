@@ -8,10 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.annasedykh.switchcontrol.R;
 import com.annasedykh.switchcontrol.data.model.SwitchEntity;
+import com.annasedykh.switchcontrol.screens.dimmer.DimmerActivity;
 
 import java.util.Collections;
 import java.util.List;
@@ -64,8 +66,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
         @BindView(R.id.percentage)
         TextView percentage;
 
-        private Boolean isSwitchedByUser = true;
+        @BindView(R.id.settings)
+        ImageView settings;
+
         private Context context;
+        private boolean isSwitchedByUser = true;
 
         SwitchEntityViewHolder(View itemView) {
             super(itemView);
@@ -79,6 +84,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
             bindPercentage(switchEntity);
             bindToggle();
             bindListener(switchEntity, listener);
+            bindSettings(switchEntity);
         }
 
         private void bindName(SwitchEntity switchEntity) {
@@ -120,12 +126,19 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
         }
 
         private void bindToggle() {
-            if (percentage.getText().toString().contains("%") && !toggle.isChecked()) {
-                isSwitchedByUser = false;
-                toggle.setChecked(true);
-            } else if (percentage.getText().toString().contains("off") && toggle.isChecked()) {
-                isSwitchedByUser = false;
-                toggle.setChecked(false);
+            boolean hasChannelOn = percentage.getText().toString().contains("%");
+            boolean hasChannelOff = percentage.getText().toString().contains(context.getString(R.string.off));
+
+            if (toggle.isChecked()) {
+                if (hasChannelOff && !hasChannelOn) {
+                    isSwitchedByUser = false;
+                    toggle.setChecked(false);
+                }
+            } else if (!toggle.isChecked()) {
+                if (hasChannelOn) {
+                    isSwitchedByUser = false;
+                    toggle.setChecked(true);
+                }
             }
             if (!isSwitchedByUser) {
                 isSwitchedByUser = true;
@@ -141,6 +154,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.SwitchEntityVi
                     }
                 }
             });
+        }
+
+        private void bindSettings(SwitchEntity switchEntity) {
+
+            settings.setOnClickListener(v -> DimmerActivity.start(context, switchEntity));
         }
     }
 
