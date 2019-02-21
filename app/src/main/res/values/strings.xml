@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Switch Control</string>
+    <string name="app_name" translatable="false">Switch Control</string>
 
+    <string name="toolbar_title">Switch Control</string>
     <string name="brightness">Brightness</string>
     <string name="switch_name">Switch name</string>
     <string name="on">on</string>
@@ -9,7 +10,7 @@
     <string name="percentage">%d%%</string>
     <string name="channel_1">Channel 1 brightness</string>
     <string name="channel_2">Channel 2 brightness</string>
-    <string name="dimmer_setting">Dimmer setting</string>
+    <string name="dimmer_setting">Dimmer settings</string>
     <string name="save">Save</string>
     <string name="update_failed">Settings update failed</string>
     <string name="updated_ok">Settings updated successfully!</string>

@@ -110,4 +110,25 @@ public class MainViewModelImpl extends MainViewModel {
         disposables.add(disposable);
     }
 
+    @Override
+    public void applyMySettings() {
+        Disposable disposable1 = database.getSwitchList()
+                .subscribeOn(Schedulers.io())
+                .subscribe(
+                        switchList -> {
+                            if (!switchList.isEmpty()) {
+                                for (SwitchEntity entity : switchList) {
+                                    Disposable disposable2 = api.updateSwitch(entity)
+                                            .subscribeOn(Schedulers.io())
+                                            .subscribe(aVoid -> Log.i(TAG, "apply settings for: " + entity.name),
+                                                    throwable -> Log.e(TAG, "onFailure: apply settings error ", throwable));
+
+                                    disposables.add(disposable2);
+                                }
+                            }
+                        }
+                );
+
+        disposables.add(disposable1);
+    }
 }

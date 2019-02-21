@@ -21,4 +21,5 @@ public abstract class MainViewModel extends AndroidViewModel {
 
     public abstract void onToggleSetChecked(String id, boolean isChecked);
 
+    public abstract void applyMySettings();
 }

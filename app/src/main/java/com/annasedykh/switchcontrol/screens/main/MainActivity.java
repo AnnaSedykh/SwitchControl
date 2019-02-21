@@ -51,6 +51,13 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.Toggl
         initInputs();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        viewModel.applyMySettings();
+    }
+
     private void initInputs() {
 
         viewModel.switchList().observe(this,
